@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CityCare Hospital Management System</title>
+<style>
+    /* --- RESET --- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background-color: #f8fafc;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* --- HEADER --- */
+    header {
+        background-color: #0077b6;
+        color: #fff;
+        padding: 15px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+    }
+
+    header h1 { font-size: 1.8em; }
+
+    nav {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        color: white;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 4px;
+        transition: background 0.3s;
+    }
+
+    nav a:hover {
+        background-color: #023e8a;
+    }
+
+    .menu-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    /* --- HERO --- */
+    .hero {
+        background: url('https://images.unsplash.com/photo-1580281657529-47a3c58b9b5b?auto=format&fit=crop&w=1400&q=80') 
+                    no-repeat center center/cover;
+        height: 450px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        color: white;
+    }
+
+    .hero h2 {
+        font-size: 3em;
+        background: rgba(0,0,0,0.6);
+        padding: 10px 25px;
+        border-radius: 10px;
+    }
+
+    .hero p {
+        margin-top: 15px;
+        background: rgba(0,0,0,0.5);
+        padding: 8px 20px;
+        border-radius: 10px;
+        font-size: 1.1em;
+    }
+
+    /* --- SERVICES --- */
+    .services {
+        padding: 60px 40px;
+        text-align: center;
+    }
+
+    .services h2 {
+        color: #023e8a;
+        margin-bottom: 40px;
+    }
+
+    .service-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        width: 280px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 30px;
+        transition: transform 0.3s;
+    }
+
+    .card:hover { transform: translateY(-8px); }
+
+    .card img {
+        width: 60px;
+        margin-bottom: 15px;
+    }
+
+    /* --- REVIEWS --- */
+    .reviews {
+        background-color: #fff;
+        padding: 60px 40px;
+        text-align: center;
+        position: relative;
+    }
+
+    .reviews h2 {
+        color: #023e8a;
+        margin-bottom: 40px;
+    }
+
+    .review {
+        background-color: #f1f7fd;
+        border-radius: 10px;
+        width: 300px;
+        padding: 25px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        margin: 0 auto;
+        transition: opacity 0.5s ease;
+    }
+
+    .review img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    .review h4 { color: #0077b6; }
+    .review p { font-size: 0.95em; color: #555; margin-top: 10px; }
+
+    .review-buttons {
+        margin-top: 20px;
+    }
+
+    .review-buttons button {
+        background-color: #0077b6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        margin: 5px;
+        transition: background 0.3s;
+    }
+
+    .review-buttons button:hover {
+        background-color: #023e8a;
+    }
+
+    /* --- APPOINTMENT --- */
+    .appointment {
+        background-color: #f8fafc;
+        padding: 60px 40px;
+        text-align: center;
+    }
+
+    .appointment h2 {
+        color: #023e8a;
+        margin-bottom: 30px;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    form input, form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    form button {
+        width: 100%;
+        padding: 12px;
+        background-color: #0077b6;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    form button:hover {
+        background-color: #023e8a;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+        background-color: #023e8a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+        .menu-toggle { display: block; }
+        nav {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            background-color: #0077b6;
+        }
+        nav.active {
+            display: flex;
+        }
+        nav a {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>CityCare Hospital</h1>
+        <span class="menu-toggle">☰</span>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#services">Services</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#appointment">Appointment</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+<section class="hero">
+  <div class="hero-content">
+    <!-- Left Side Text -->
+    <div class="hero-text">
+      <h1>Your Health, Our Mission</h1>
+      <p>Delivering world-class healthcare with compassion and innovation.</p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary">Explore Services</a>
+        <a href="#appointment" class="btn btn-secondary">Book Appointment</a>
+      </div>
+    </div>
+    <!-- Right Side Image -->
+    <div class="hero-image">
+      <img src="https://iihmrdelhi.edu.in/blog/wp-content/uploads/2020/01/Hospital-Management.jpg" alt="Doctor with patient">
+      <div class="image-overlay"></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2966/2966485.png" alt="Emergency">
+                <h3>Emergency</h3>
+                <p>24/7 emergency response and medical care at your service.</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2966/2966508.png" alt="Cardiology">
+                <h3>Cardiology</h3>
+                <p>Expert cardiologists for heart health and care.</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2966/2966521.png" alt="Pediatrics">
+                <h3>Pediatrics</h3>
+                <p>Comprehensive care for infants, children, and adolescents.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <h2>What Our Patients Say</h2>
+        <div class="review">
+            <img id="review-img" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Patient">
+            <h4 id="review-name">Jane Miller</h4>
+            <p id="review-text">"CityCare provided me with excellent service and care. The doctors are very professional and kind."</p>
+        </div>
+        <div class="review-buttons">
+            <button id="prevBtn">◀ Prev</button>
+            <button id="nextBtn">Next ▶</button>
+        </div>
+    </section>
+
+    <section id="appointment" class="appointment">
+        <h2>Book an Appointment</h2>
+        <form id="appointmentForm">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="text" placeholder="Phone Number" required>
+            <textarea rows="4" placeholder="Describe your symptoms"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer id="contact">
+        <p>&copy; 2025 CityCare Hospital | Designed with ❤️ to care for you</p>
+    </footer>
+
+<script>
+    /* --- MOBILE MENU TOGGLE --- */
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+    });
+
+    /* --- REVIEW CAROUSEL --- */
+    const reviews = [
+        {
+            img: "https://randomuser.me/api/portraits/women/65.jpg",
+            name: "Jane Miller",
+            text: "CityCare provided me with excellent service and care. The doctors are very professional and kind."
+        },
+        {
+            img: "https://randomuser.me/api/portraits/men/45.jpg",
+            name: "Robert Wilson",
+            text: "The hospital’s emergency response is fast and reliable. I’m grateful for their timely help."
+        },
+        {
+            img: "https://randomuser.me/api/portraits/women/70.jpg",
+            name: "Emily Clark",
+            text: "I had a great experience booking an appointment online and getting treated by experienced specialists."
+        }
+    ];
+
+    let currentReview = 0;
+    const imgEl = document.getElementById("review-img");
+    const nameEl = document.getElementById("review-name");
+    const textEl = document.getElementById("review-text");
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+        currentReview = (currentReview + 1) % reviews.length;
+        updateReview();
+    });
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+        currentReview = (currentReview - 1 + reviews.length) % reviews.length;
+        updateReview();
+    });
+
+    function updateReview() {
+        const r = reviews[currentReview];
+        imgEl.src = r.img;
+        nameEl.textContent = r.name;
+        textEl.textContent = `"${r.text}"`;
+    }
+
+    /* --- FORM SUBMIT ALERT --- */
+    const form = document.getElementById("appointmentForm");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("✅ Thank you! Your appointment request has been received. We'll contact you soon.");
+        form.reset();
+    });
+</script>
+</body>
+</html>
